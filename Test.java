@@ -1,7 +1,10 @@
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Test {
 
@@ -10,144 +13,166 @@ public class Test {
 		
 		//all tests will be printed in this file
 		PrintWriter writer = new PrintWriter("methodTests.txt", "UTF-8");
-		
+
+
 		//test getFiles
-		String directoryPath = "/Users/liucheryl/Desktop/javaPython/proj/namesbystate";
+		String directoryPath = "namesbystate";
 		ArrayList<String> myFiles = getFiles(directoryPath);
 		//System.out.println(Arrays.toString(myFiles.toArray()));
-		
 		//test loadBabyNames (this tests readCSV and concat)
 		MyDataFrame baby = loadBabyNames(myFiles, directoryPath);
+
+
 		System.out.println("Dataframe size after loading all states:");
 		writer.println("Dataframe size after loading all states:");
 		System.out.println(baby.babynames.size());
 		writer.println(baby.babynames.size());
-		
+
+
+
 		//test head
-		//MyDataFrame babyhead = baby.head(5);
-		//System.out.println("\nTesting Head(5):");
-		//writer.println("\nTesting Head(5)");
-		//System.out.println(babyhead.babynames);
-		//writer.println(babyhead.babynames);
+		MyDataFrame babyhead = baby.head(5);
+		System.out.println("\nTesting Head(5):");
+		writer.println("\nTesting Head(5)");
+		System.out.println(babyhead.babynames);
+		writer.println(babyhead.babynames);
 
 		//test tail
-		//MyDataFrame babytail = baby.tail(5);
-		//System.out.println("\nTesting Tail(5):");
-		//writer.println("\nTesting Tail(5):");
-		//System.out.println(babytail.babynames);
-		//writer.println(babytail.babynames);
+		MyDataFrame babytail = baby.tail(5);
+		System.out.println("\nTesting Tail(5):");
+		writer.println("\nTesting Tail(5):");
+		System.out.println(babytail.babynames);
+		writer.println(babytail.babynames);
 
 		//test dType on index
-		//String typeIndex = baby.dType(2);
-		//System.out.println("\nThe type of index 2 (year) is:");
-		//writer.println("\nThe type of index 2 (year) is:");
-		//System.out.println(typeIndex);
-		//writer.println(typeIndex);
+		String typeIndex = baby.dType(2);
+		System.out.println("\nThe type of index 2 (year) is:");
+		writer.println("\nThe type of index 2 (year) is:");
+		System.out.println(typeIndex);
+		writer.println(typeIndex);
 
 		//test dType on name
-		//String typeName = baby.dType("name");
-		//System.out.println("\nThe type of name column is:");
-		//writer.println("\nThe type of name column is:");
-		//System.out.println(typeName);
-		//writer.println(typeName);
+		String typeName = baby.dType("name");
+		System.out.println("\nThe type of name column is:");
+		writer.println("\nThe type of name column is:");
+		System.out.println(typeName);
+		writer.println(typeName);
 
 		//test loc on index (1000000)
-		//MyDataFrame locdf = baby.loc(1000000);
-		//System.out.println("\nSize of dataframe after loc(1,000,000):");
-		//writer.println("\nSize of dataframe after loc(1,000,000):");
-		//System.out.println(locdf.babynames.size());
-		//writer.println(locdf.babynames.size());
-		
+		MyDataFrame locdf = baby.loc(1000000);
+		System.out.println("\nSize of dataframe after loc(1,000,000):");
+		writer.println("\nSize of dataframe after loc(1,000,000):");
+		System.out.println(locdf.babynames.size());
+		writer.println(locdf.babynames.size());
+
 		//test loc from index 5 to index 10
-		//MyDataFrame locrange = baby.loc(5, 10);
-		//System.out.println("\nDataframe after loc(5, 10):");
-		//writer.println("\nDataframe after loc(5, 10):");
-		//System.out.println(locrange.babynames);
-		//writer.println(locrange.babynames);
+		MyDataFrame locrange = baby.loc(5, 10);
+		System.out.println("\nDataframe after loc(5, 10):");
+		writer.println("\nDataframe after loc(5, 10):");
+		System.out.println(locrange.babynames);
+		writer.println(locrange.babynames);
 
 		//test loc on "name"
-		//MyDataFrame locdfName = baby.loc("name");
-		//System.out.println("\nSize of dataframe after loc(name):");
-		//writer.println("\nSize of dataframe after loc(name):");
-		//System.out.println(locdfName.babynames.size());
-		//writer.println(locdfName.babynames.size());
+		MyDataFrame locdfName = baby.loc("name");
+		System.out.println("\nSize of dataframe after loc(name):");
+		writer.println("\nSize of dataframe after loc(name):");
+		System.out.println(locdfName.babynames.size());
+		writer.println(locdfName.babynames.size());
 
 		//test loc from "name" to "count"
-		//MyDataFrame locrangeName = baby.loc("name","count");
-		//System.out.println("\nDataframe after loc(name, count):");
-		//writer.println("\nDataframe after loc(name, count):");
-		//System.out.println(locrangeName.babynames.size());
-		//writer.println(locrangeName.babynames.size());
+		MyDataFrame locrangeName = baby.loc("name","count");
+		System.out.println("\nDataframe after loc(name, count):");
+		writer.println("\nDataframe after loc(name, count):");
+		System.out.println(locrangeName.babynames.size());
+		writer.println(locrangeName.babynames.size());
 
 		//test getMin on index 2 (year)
-		//Object minYear = baby.getMin(2);
-		//System.out.println("\nThe min year is:");
-		//writer.println("\nThe min year is:");
-		//System.out.println(minYear);
-		//writer.println(minYear);
+		Object minYear = baby.getMin(2);
+		System.out.println("\nThe min year is:");
+		writer.println("\nThe min year is:");
+		System.out.println(minYear);
+		writer.println(minYear);
 
 		//test getMax on index 3 (Name)
-		//Object maxName = baby.getMax(3);
-		//System.out.println("\nThe max Name is:");
-		//writer.println("\nThe max Name is:");
-		//System.out.println(maxName);
-		//writer.println(maxName);
+		Object maxName = baby.getMax(3);
+		System.out.println("\nThe max Name is:");
+		writer.println("\nThe max Name is:");
+		System.out.println(maxName);
+		writer.println(maxName);
 
 		//test getMin on "count"
-		//Object minCount = baby.getMin("count");
-		//System.out.println("\nThe min count is:");
-		//writer.println("\nThe min count is:");
-		//System.out.println(minCount);
-		//writer.println(minCount);
+		Object minCount = baby.getMin("count");
+		System.out.println("\nThe min count is:");
+		writer.println("\nThe min count is:");
+		System.out.println(minCount);
+		writer.println(minCount);
 
 		//test getMax on "count"
-		//Object maxCount = baby.getMax("count");
-		//System.out.println("\nThe max count is:");
-		//writer.println("\nThe max count is:");
-		//System.out.println(maxCount);
-		//writer.println(maxCount);
+		Object maxCount = baby.getMax("count");
+		System.out.println("\nThe max count is:");
+		writer.println("\nThe max count is:");
+		System.out.println(maxCount);
+		writer.println(maxCount);
 
-		// test slice with index
-		//ArrayList slicing_index = baby.slice(2);
-		//System.out.println("\nDataframe after slicing on index:");
-		//writer.println("\nDataframe after slicing on index");
-		//System.out.println(slicing_index);
-		//writer.println(slicing_index);
-	   
-		// test slice with name
-		//ArrayList slicing_index_String = baby.slice("state");
-		//System.out.println("\nDataframe after slicing on index:");
-		//writer.println("\nDataframe after slicing on index");
-		//System.out.println(slicing_index_String);
-		//writer.println(slicing_index_String);
-	   
-		// test slice with index
-		//int[] test = {1,2,3};
-		//ArrayList slicing_index_list = baby.slice(test);
-		//System.out.println("\nDataframe after slicing on index:");
-		//writer.println("\nDataframe after slicing on index");
-		//System.out.println(slicing_index_list);
-		//writer.println(slicing_index_list);
-	   
-	   
-		// test slice with names
-		//String[] test_string = {"state", "gender"};
-		//ArrayList slicing_index_list_string = baby.slice(test_string);
-		//System.out.println("\nDataframe after slicing on index:");
-		//writer.println("\nDataframe after slicing on index");
-		//System.out.println(slicing_index_list_string);
-		//writer.println(slicing_index_list_string);
+		// second reader for appending
+		//PrintWriter writer = new PrintWriter(new FileOutputStream(new File("methodTests.txt"),true));
+
+		// test slice with index 2
+		ArrayList<List<Comparable>> slicing_index = baby.slice(2);
+		System.out.println("\nDataframe after slicing on index:");
+		writer.println("\nDataframe after slicing on index");
+		System.out.println(slicing_index.subList(0,100));
+		writer.println(slicing_index.subList(0,100));
+
+		// test slice with name state
+		ArrayList<List<Comparable>> slicing_index_String = baby.slice("state");
+		System.out.println("\nDataframe after slicing on index:");
+		writer.println("\nDataframe after slicing on index");
+		System.out.println(slicing_index_String.subList(0,100));
+		writer.println(slicing_index_String.subList(0,100));
+
+		// test slice with index 1, 2
+		int[] test = {1,2};
+		ArrayList slicing_index_list = baby.slice(test);
+		System.out.println("\nDataframe after slicing on index:");
+		writer.println("\nDataframe after slicing on index");
+		System.out.println(slicing_index_list.subList(0,100));
+		writer.println(slicing_index_list.subList(0,100));
+
+
+		// test slice with names state and gender
+		String[] test_string = {"state", "gender"};
+		ArrayList slicing_index_list_string = baby.slice(test_string);
+		System.out.println("\nDataframe after slicing on index:");
+		writer.println("\nDataframe after slicing on index");
+		System.out.println(slicing_index_list_string.subList(0,100));
+		writer.println(slicing_index_list_string.subList(0,100));
+
+		// test fliter with names state IN
+		ArrayList flitered_df = baby.filter("state", "=", "IN");
+		System.out.println("\nDataframe after flitering:");
+		writer.println("\nDataframe after flitering");
+		System.out.println(flitered_df);
+		writer.println(flitered_df);
+
+
+
+
+
+
+
 
 
 		//test write csv (write sortedName to csv)
-		//writer.println("\nWrite above dataframe to csv. (See 'BabyNames.csv')");
-		//try {
-		//	MyPandas.writeCSV(baby, "BabyNames.csv");
-		//}  
-		//catch (IOException e) {
-		//	e.printStackTrace();
-		//}
-		
+		writer.println("\nWrite above dataframe to csv. (See 'BabyNames.csv')");
+
+		try {
+			MyPandas.writeCSV(baby, "BabyNames.csv");
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+
 		writer.close();
 	}
 

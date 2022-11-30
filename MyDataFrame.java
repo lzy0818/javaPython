@@ -218,6 +218,7 @@ public class MyDataFrame {
     	return getMax(index);
 	}
 
+
     ////////////////Need to implement/////////////////////////////////////////////////////
 
 	//Returns the rows starting from label
@@ -252,9 +253,62 @@ public class MyDataFrame {
 
 
     //Returns data filtered by applying “col op o” on MyDataFrame object, e.g. “count > 10”, “state = ‘IL’”. 
-    public MyDataFrame filter(String col, String op, Object o) {
-		MyDataFrame filtered = new MyDataFrame();
-		return filtered;
+	public ArrayList filter(String col, String op, Object o) {
+		ArrayList<List<Comparable>> newData = new ArrayList<>();
+		switch (op) {
+			case ">":
+				//for each column in dataframe
+				for (int i = 0; i < this.babynames.size(); i++) {
+					List<Comparable> curRow = this.babynames.get(i);
+					if ((int) curRow.get(this.map.get(col)) > (int) Integer.parseInt((String) o)) {
+						newData.add(curRow);
+					}
+				}
+				break;
+			case ">=":
+				for (int i = 0; i < this.babynames.size(); i++) {
+					List<Comparable> curRow = this.babynames.get(i);
+					if ((int) curRow.get(this.map.get(col)) >= (int) Integer.parseInt((String) o)) {
+						newData.add(curRow);
+					}
+				}
+				break;
+			case "<":
+				for (int i = 0; i < this.babynames.size(); i++) {
+					List<Comparable> curRow = this.babynames.get(i);
+					if ((int) curRow.get(this.map.get(col)) < (int) Integer.parseInt((String) o)) {
+						newData.add(curRow);
+					}
+				}
+				break;
+			case "<=":
+				for (int i = 0; i < this.babynames.size(); i++) {
+					List<Comparable> curRow = this.babynames.get(i);
+					if ((int) curRow.get(this.map.get(col)) <= (int) Integer.parseInt((String) o)) {
+						newData.add(curRow);
+					}
+				}
+				break;
+			case "=":
+				for (int i = 0; i < this.babynames.size(); i++) {
+					List<Comparable> curRow = this.babynames.get(i);
+					if (String.valueOf(curRow.get(this.map.get(col))).equals(o)) {
+						newData.add(curRow);
+					}
+				}
+				break;
+			case "!=":
+				for (int i = 0; i < this.babynames.size(); i++) {
+					List<Comparable> curRow = this.babynames.get(i);
+					if (!String.valueOf(curRow.get(this.map.get(col))).equals(o)) {
+						newData.add(curRow);
+					}
+				}
+				break;
+		}
+
+		return newData;
+
 	}
 
 
