@@ -218,42 +218,8 @@ public class MyDataFrame {
     	return getMax(index);
 	}
 
-
-    ////////////////Need to implement/////////////////////////////////////////////////////
-
-	//Returns the rows starting from label
-	public MyDataFrame loc(String label) {
-		MyDataFrame loc = new MyDataFrame();
-		int colIndex = this.map.get(label);
-		for(int i=0; i<babynames.size(); i++){
-			List<Comparable> row = new ArrayList<> ();
-			for(int j = colIndex; j < 5; j ++){
-				row.add(babynames.get(i).get(j));
-			}
-			loc.babynames.add(row);
-		}
-		return loc;
-	}
-
-
-    //Returns the rows between from and to (including from and to)
-	public MyDataFrame loc(String from, String to) {
-		MyDataFrame loc = new MyDataFrame();
-		int colIndexFrom = this.map.get(from);
-		int colIndexTo = this.map.get(to);
-		for(int i=0; i<babynames.size(); i++){
-			List<Comparable> row = new ArrayList<> ();
-			for(int j = colIndexFrom; j < colIndexTo; j ++){
-				row.add(babynames.get(i).get(j));
-			}
-			loc.babynames.add(row);
-		}
-		return loc;
-	}
-
-
-    //Returns data filtered by applying “col op o” on MyDataFrame object, e.g. “count > 10”, “state = ‘IL’”. 
-	public ArrayList filter(String col, String op, Object o) {
+	//Returns data filtered by applying “col op o” on MyDataFrame object, e.g. “count > 10”, “state = ‘IL’”. 
+    public MyDataFrame filter(String col, String op, Object o) {
 		ArrayList<List<Comparable>> newData = new ArrayList<>();
 		switch (op) {
 			case ">":
@@ -308,8 +274,40 @@ public class MyDataFrame {
 		}
 
 		return newData;
-
 	}
+
+    ////////////////Need to implement/////////////////////////////////////////////////////
+
+	//Returns the rows starting from label
+	public MyDataFrame loc(String label) {
+		MyDataFrame loc = new MyDataFrame();
+		int colIndex = this.map.get(label);
+		for(int i=0; i<babynames.size(); i++){
+			List<Comparable> row = new ArrayList<> ();
+			for(int j = colIndex; j < 5; j ++){
+				row.add(babynames.get(i).get(j));
+			}
+			loc.babynames.add(row);
+		}
+		return loc;
+	}
+
+
+    //Returns the rows between from and to (including from and to)
+	public MyDataFrame loc(String from, String to) {
+		MyDataFrame loc = new MyDataFrame();
+		int colIndexFrom = this.map.get(from);
+		int colIndexTo = this.map.get(to);
+		for(int i=0; i<babynames.size(); i++){
+			List<Comparable> row = new ArrayList<> ();
+			for(int j = colIndexFrom; j < colIndexTo; j ++){
+				row.add(babynames.get(i).get(j));
+			}
+			loc.babynames.add(row);
+		}
+		return loc;
+	}
+
 
 
 	
